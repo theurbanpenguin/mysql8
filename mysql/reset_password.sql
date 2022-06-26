@@ -1,0 +1,1 @@
+ALTER USER 'bob'@'localhost' IDENTIFIED BY 'Password1';
