@@ -44,7 +44,7 @@
         login_password: "{{ password }}"
         name: all
         state: import
-        target: /home/tux/mysql8/northwindmysql.sql
+        target: "{{ lookup('env', 'USER') }}/mysql8/northwindmysql.sql"
 
     - name: user mysql
       mysql_user:
