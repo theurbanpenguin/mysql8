@@ -1,3 +1,4 @@
+USE northwind;
 SELECT CONCAT(firstname, ' ', lastname) as Employees,
 City From employees
 UNION
