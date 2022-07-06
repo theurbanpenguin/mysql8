@@ -1,0 +1,40 @@
+---
+- name: Install Pre-Reqs
+  hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install Python3
+      dnf:
+        name: python3
+        state: present
+
+- name: Install and Manage MySQL 8.0 AlmaLinux 8
+  hosts: localhost
+  become: false
+  vars:
+    - ansible_python_interpreter: /usr/bin/python3
+    - password: Password1
+  tasks:
+    - name: install python mysql connector
+      become: true
+      dnf:
+        name:
+          - python3-PyMySQL
+          - mysql-server
+          - mysql
+        state: present
+    - name: Manage Mysqld service
+      become: true
+      service:
+        name: mysqld
+        state: started
+        enabled: true
+    - name: Manage Mysql Root
+      become: true
+      mysql_user:
+        login_user: root
+        login_password: "{{ password }}"
+        name: root
+        password: "{{ password }}"
+        check_implicit_admin: true
