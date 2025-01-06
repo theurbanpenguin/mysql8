@@ -1,11 +1,11 @@
 ---
 - name: Install Pre-Reqs
   hosts: localhost
-  gather_facts: false
+  gather_facts: true
   become: true
   tasks:
     - name: Install Python3
-      dnf:
+      ansible.builtin.package:
         name: python3
         state: present
 
@@ -18,18 +18,29 @@
   tasks:
     - name: install python mysql connector
       become: true
-      dnf:
+      ansible.builtin.package:
         name:
           - python3-PyMySQL
           - mysql-server
-          - mysql
+          - mysql-client
         state: present
-    - name: Manage Mysqld service
+
+    - name: Manage Mysqld service RedHat
       become: true
-      service:
+      ansible.builtin.service:
         name: mysqld
         state: started
         enabled: true
+      when: ansible["os_family'] == "RedHat"
+
+    - name: Manage Mysqld service Debian
+      become: true
+      ansible.builtin.service:
+        name: mysql
+        state: started
+        enabled: true
+      when: ansible["os_family'] == "Debian"
+
     - name: Manage Mysql Root
       become: true
       mysql_user:
