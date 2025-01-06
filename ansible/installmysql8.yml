@@ -31,7 +31,7 @@
         name: mysqld
         state: started
         enabled: true
-      when: ansible["os_family"] == "RedHat"
+      when: ansible_facts["os_family"] == "RedHat"
 
     - name: Manage Mysqld service Debian
       become: true
@@ -39,7 +39,7 @@
         name: mysql
         state: started
         enabled: true
-      when: ansible["os_family"] == "Debian"
+      when: ansible_facts["os_family"] == "Debian"
 
     - name: Manage Mysql Root
       become: true
