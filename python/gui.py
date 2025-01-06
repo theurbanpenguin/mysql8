@@ -16,10 +16,10 @@ def fetch_employees():
             host=host,
             user=user,
             password=password,
-            database=database
+            database=northwind
         )
         with connection.cursor() as cursor:
-            cursor.execute("SELECT EmployeeID, FirstName, LastName, BirthDate FROM Employees;")
+            cursor.execute("SELECT EmployeeID, FirstName, LastName, BirthDate FROM employees;")
             return cursor.fetchall()
     except pymysql.MySQLError as e:
         print(f"Database error: {e}")
