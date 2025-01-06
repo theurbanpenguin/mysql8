@@ -1,3 +1,4 @@
+USE northwind;
 WITH RECURSIVE EmployeeHierarchy AS (
     -- Anchor member: Select top-level employees (those without a manager)
     SELECT
