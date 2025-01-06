@@ -8,7 +8,7 @@ WITH RECURSIVE EmployeeHierarchy AS (
         ReportsTo,
         CAST(NULL AS CHAR(50)) AS ManagerFirstName,
         CAST(NULL AS CHAR(50)) AS ManagerLastName
-    FROM Employees
+    FROM employees
     WHERE ReportsTo IS NULL
 
     UNION ALL
@@ -21,7 +21,7 @@ WITH RECURSIVE EmployeeHierarchy AS (
         e.ReportsTo,
         m.EmployeeFirstName AS ManagerFirstName,
         m.EmployeeLastName AS ManagerLastName
-    FROM Employees e
+    FROM employees e
     INNER JOIN EmployeeHierarchy m
         ON e.ReportsTo = m.EmployeeID
 )
