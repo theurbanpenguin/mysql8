@@ -41,14 +41,16 @@
         enabled: true
       when: ansible_facts["os_family"] == "Debian"
 
-    - name: Manage Mysql Root
-      become: true
+    - name: Ensure MySQL root user has a native MySQL password
       mysql_user:
-        login_user: root
-        login_password: "{{ password }}"
-        name: root
-        password: "{{ password }}"
-        check_implicit_admin: true
+        login_unix_socket: /var/run/mysqld/mysqld.sock  # Use the socket for initial login
+        user: root
+        host: localhost
+        password: "{{ password }}"            # Set the new root password
+        plugin: mysql_native_password                  # Switch to mysql_native_password authentication
+        state: present
+      become: true
+
     - name: Import Database
       mysql_db:
         login_user: root
