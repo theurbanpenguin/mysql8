@@ -1,4 +1,4 @@
-CREATE DATABASE northwind;
+CREATE DATABASE IF NOT EXISTS northwind;
 USE northwind;
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
