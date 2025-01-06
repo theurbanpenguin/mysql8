@@ -9,6 +9,7 @@ user = "tux"
 password = "Password1"
 database = "northwind"
 
+
 # Function to fetch employees from the database
 def fetch_employees():
     try:
@@ -28,19 +29,26 @@ def fetch_employees():
         if 'connection' in locals() and connection.open:
             connection.close()
 
+
 # Function to display selected employee details
 def show_employee_details(event):
-    selected_id = employee_var.get()
-    for emp in employees:
-        if str(emp[0]) == selected_id:
-            firstname = emp[1]
-            lastname = emp[2]
-            birthdate = emp[3]
-            year = birthdate.year if birthdate else "Unknown"
-            output_label.config(
-                text=f"First Name: {firstname}\nLast Name: {lastname}\nYear of Birth: {year}"
-            )
-            break
+    selected_value = employee_var.get()
+    if selected_value:
+        # Extract EmployeeID (the part before the colon)
+        selected_id = selected_value.split(":")[0].strip()
+
+        # Search for the employee in the list
+        for emp in employees:
+            if str(emp[0]) == selected_id:
+                firstname = emp[1]
+                lastname = emp[2]
+                birthdate = emp[3]
+                year = birthdate.year if birthdate else "Unknown"
+                output_label.config(
+                    text=f"First Name: {firstname}\nLast Name: {lastname}\nYear of Birth: {year}"
+                )
+                break
+
 
 # Fetch employees from the database
 employees = fetch_employees()
