@@ -3,7 +3,7 @@ import pymysql
 # Connection details
 host = "localhost"
 user = "tux"
-password = "password1"
+password = "Password1"
 database = "northwind"
 
 try:
