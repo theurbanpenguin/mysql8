@@ -1,4 +1,4 @@
-BEGIN
+BEGIN;
     -- Start a transaction
     SET @rows_affected = 0;
 
