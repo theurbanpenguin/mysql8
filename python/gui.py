@@ -5,8 +5,8 @@ from datetime import datetime
 
 # Database connection details
 host = "localhost"
-user = "your_username"
-password = "your_password"
+user = "tux"
+password = "Password1"
 database = "northwind"
 
 # Function to fetch employees from the database
