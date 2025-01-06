@@ -20,7 +20,7 @@
       become: true
       ansible.builtin.package:
         name:
-          - python3-PyMySQL
+          - python3-pymysql
           - mysql-server
           - mysql-client
         state: present
