@@ -1,6 +1,6 @@
 BEGIN
     -- Start a transaction
-    DECLARE rows_affected INT;
+    SET @rows_affected = 0;
 
     START TRANSACTION;
 
