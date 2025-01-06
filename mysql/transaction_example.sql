@@ -2,8 +2,6 @@ BEGIN;
     -- Start a transaction
     SET @rows_affected = 0;
 
-    START TRANSACTION;
-
     -- Attempt to delete the user with a specific EmployeeID
     DELETE FROM employees
     -- WHERE employeeid = 10;
