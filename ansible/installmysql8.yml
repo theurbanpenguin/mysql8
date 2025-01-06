@@ -9,18 +9,19 @@
         name: python3
         state: present
 
-- name: Install and Manage MySQL 8.0 AlmaLinux 8
+- name: Install and Manage MySQL 8.0 Database Server
   hosts: localhost
   become: false
   vars:
     - ansible_python_interpreter: /usr/bin/python3
     - password: Password1
   tasks:
-    - name: install python mysql connector
+    - name: Install MySQL and Python Packages
       become: true
       ansible.builtin.package:
         name:
           - python3-pymysql
+          - python3-tk
           - mysql-server
           - mysql-client
         state: present
