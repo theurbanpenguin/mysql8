@@ -16,7 +16,7 @@ def fetch_employees():
             host=host,
             user=user,
             password=password,
-            database=northwind
+            database=database
         )
         with connection.cursor() as cursor:
             cursor.execute("SELECT EmployeeID, FirstName, LastName, BirthDate FROM employees;")
