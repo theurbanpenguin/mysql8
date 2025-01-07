@@ -24,7 +24,7 @@ try:
         query = "SELECT EmployeeName, ManagerName FROM employee_manager WHERE EmployeeName = %s"
         cursor.execute(query, (user_name,))
         result = cursor.fetchone()  # Fetch the result of the query
-        print(f"Employee: {result[0]} -- Manager: {result[1]}")  # Display the user and their manager
+        print(f"Employee: {result[0]}", f"Manager: {result[1]}", sep="\n")  # Display the user and their manager
 
 except pymysql.MySQLError as e:
     # Handle any connection errors
