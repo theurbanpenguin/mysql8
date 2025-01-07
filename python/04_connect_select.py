@@ -24,8 +24,12 @@ try:
         query = "SELECT EmployeeName, ManagerName FROM employee_manager WHERE EmployeeName = %s"
         cursor.execute(query, (user_name,))
         result = cursor.fetchone()  # Fetch the result of the query
-        print(f"Employee: {result[0]}", f"Manager: {result[1]}", sep="\n")  # Display the user and their manager
-
+        employee_name = f"Employee: {result[0]}"
+        manager_name = f"Manager: {result[1]}"
+        header_length = max(len(employee_name), len(manager_name))
+        print("=" * header_length)
+        print(employee_name, manager_name, sep="\n")  # Display the user and their manager
+        print("=" * header_length)
 except pymysql.MySQLError as e:
     # Handle any connection errors
     print(f"Error connecting to the database: {e}")
