@@ -1,5 +1,4 @@
-mport
-pymysql
+import pymysql
 import getpass
 
 # Database connection parameters
