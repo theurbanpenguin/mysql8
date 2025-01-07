@@ -17,19 +17,33 @@ try:
     )
     print("Connection successful!")  # If no exception is raised, the connection is established.
 
-    # Demonstrate the connection by executing a view query
+    # Execute a query to fetch employees under a specific manager
     with connection.cursor() as cursor:
-        # To avoid SQL Injection attacks use parameterised queries
-        user_name = input("Enter the username to query: ")
-        query = "SELECT ManagerName, EmployeeName FROM employee_manager WHERE ManagerName = %s"
-        cursor.execute(query, (user_name,))
-        result = cursor.fetchone()  # Fetch the result of the query
-        employee_name = f"Employee: {result[0]}"
-        manager_name = f"Manager: {result[1]}"
-        header_length = max(len(employee_name), len(manager_name))
-        print("=" * header_length)
-        print(employee_name, manager_name, sep="\n")  # Display the user and their manager
-        print("=" * header_length)
+        # Get manager name from user input
+        manager_name = input("Enter the manager's name to query: ")
+
+        query = """SELECT EmployeeName 
+                   FROM employee_manager 
+                   WHERE ManagerName = %s"""
+        cursor.execute(query, (manager_name,))  # Parameterized query to avoid SQL Injection
+
+        # Fetch all employees managed by the manager
+        results = cursor.fetchall()
+
+        if results:  # Check if there are any results
+            # Print the manager's header
+            header = f"Manager: {manager_name}"
+            print("=" * len(header))
+            print(header)
+            print("=" * len(header))
+
+            # Loop through and display each employee under the manager
+            print(f"Employees under {manager_name}:")
+            for (employee,) in results:  # Each row in results corresponds to an employee
+                print(f"- {employee}")
+        else:
+            print(f"No employees found for Manager: {manager_name}")
+
 except pymysql.MySQLError as e:
     # Handle any connection errors
     print(f"Error connecting to the database: {e}")
