@@ -21,7 +21,7 @@ try:
     with connection.cursor() as cursor:
         # To avoid SQL Injection attacks use parameterised queries
         user_name = input("Enter the username to query: ")
-        query = "SELECT * FROM employee_manager WHERE EmployeeName = %s"
+        query = "SELECT EmployeeName, ManagerName FROM employee_manager WHERE EmployeeName = %s"
         cursor.execute(query, (user_name,))
         result = cursor.fetchone()  # Fetch the result of the query
         print(f"Database server time: {result[0]}")  # Display the user
