@@ -6,9 +6,6 @@ CREATE PROCEDURE delete_user_by_username(IN u_name VARCHAR(20))
 BEGIN
     DECLARE user_count INT;
 
-    -- Start a transaction
-    START TRANSACTION;
-
     -- Count the number of users matching the given username
     SELECT COUNT(*) INTO user_count
     FROM `user`
