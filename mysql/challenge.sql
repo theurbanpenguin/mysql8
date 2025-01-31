@@ -17,7 +17,7 @@ CREATE TABLE Employees (
     EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
     DeptID INT,
-    FOREIGN KEY (DeptID) RprocudreEFERENCES Departments(DeptID) ON DELETE SET NULL
+    FOREIGN KEY (DeptID) REFERENCES Departments(DeptID) ON DELETE SET NULL
 );
 
 CREATE TABLE Managers (
@@ -28,7 +28,10 @@ CREATE TABLE Managers (
     FOREIGN KEY (DeptID) REFERENCES Departments(DeptID) ON DELETE CASCADE
 );
 
--- Step 4: Create views
+-- Step 4: Enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Step 5: Create views
 
 -- View to show Employees with their Department Name
 CREATE VIEW EmployeeDetails AS
@@ -42,7 +45,7 @@ SELECT d.DeptID, d.DeptName, e.Name AS ManagerName
 FROM Departments d
 JOIN Employees e ON d.ManagerID = e.EmployeeID;
 
--- Step 5: Create stored procedures
+-- Step 6: Create stored procedures
 
 -- Procedure to add a Department
 DELIMITER //
@@ -69,8 +72,10 @@ BEGIN
 END //
 DELIMITER ;
 
--- Step 6: Insert sample data
+-- Step 7: Insert sample data
 
+-- Disable foreign key checks before inserting data
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- Insert a new department
 CALL AddDepartment('IT');
